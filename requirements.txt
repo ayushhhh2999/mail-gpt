@@ -4,4 +4,6 @@ langgraph
 langchain-groq
 python-dotenv
 PyPDF2
-openai
+openai 
+pytesseract 
+pillow
