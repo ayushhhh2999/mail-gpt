@@ -15,8 +15,6 @@ load_dotenv()
 # Initialize LLM
 # ---------------------------
 api_key = os.getenv("GROQ_API_KEY") or st.secrets["GROQ_API_KEY"]
-sender_email = os.getenv("EMAIL_USER") or st.secrets["EMAIL_USER"]
-sender_password = os.getenv("EMAIL_PASS") or st.secrets["EMAIL_PASS"]
 
 llm = ChatGroq(
     model="qwen/qwen3-32b",
