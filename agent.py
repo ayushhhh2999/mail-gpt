@@ -108,7 +108,25 @@ st.info("""
 🔐 Important: Gmail App Password Required
 
 This app will NOT work with your normal Gmail password.
-Use App Password only.
+Google blocks less-secure login attempts, so you must use an App Password.
+""")
+
+# ✅ KEEP THIS SECTION (as you wanted)
+with st.expander("🔐 How to generate Gmail App Password (Click to expand)"):
+    st.write("""
+1. Go to: https://myaccount.google.com/security  
+2. Turn ON 2-Step Verification (2FA)  
+3. After enabling 2FA, go to:  
+   https://myaccount.google.com/apppasswords  
+4. Select:
+   - App → Mail
+   - Device → Other → type anything like Email Agent
+5. Click Generate
+6. Copy the 16-character password
+
+Important:
+- Do NOT use your normal Gmail password
+- Use the generated App Password only
 """)
 
 # ---------------------------
@@ -159,7 +177,7 @@ You are a professional email assistant.
 Write a clear, natural, human sounding email.
 
 Rules:
-- Do not use symbols, emojis, dashes, or bullet points
+- Do not use symbols or bullet points
 - Keep it simple and professional
 
 User request:
@@ -187,14 +205,12 @@ Body:
             st.error(f"LLM Error: {str(e)}")
             st.stop()
 
-        # Better parsing
         subject_match = re.search(r"Subject:\s*(.*)", text)
         body_match = re.search(r"Body:\s*([\s\S]*)", text)
 
         subject = subject_match.group(1).strip() if subject_match else "No Subject"
         body = body_match.group(1).strip() if body_match else text
 
-        # Save state
         st.session_state.subject = subject
         st.session_state.body = body
         st.session_state.sender_email = sender_email
